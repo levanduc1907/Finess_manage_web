@@ -31,4 +31,21 @@ export const apis = {
   createSet: `${host}/set/create`,
   editSet: `${host}/set/edit`,
   getSet: (id: string) => `${host}/set/get/${id}`,
+  getSchedule: (id: string) => `${host}/schedule/${id}`,
+  getAllSchedule: (queries: any) => {
+    const query = RequestQueryBuilder.create({
+      page: queries.page,
+      limit: queries.limit,
+    }).query(true);
+    return `${host}/schedule/all?${query}&filter={"createdBy":{"$eq":"Admin"}}`;
+  },
+  createSchedule: `${host}/schedule/create`,
+  editSchedule: `${host}/schedule/edit`,
+  getAllFood: (queries: any) => {
+    const query = RequestQueryBuilder.create({
+      page: queries.page,
+    }).query(true);
+    return `${host}/food/all?${query}`;
+  },
+  getAllNutrition: `${host}/food/nutrition/all`,
 };

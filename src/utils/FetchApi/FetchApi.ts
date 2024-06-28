@@ -4,11 +4,15 @@ import { apis } from './apis';
 import {
   TCreateExercise,
   TCreateMuscleGroup,
+  TCreateSchedule,
   TCreateSetBody,
   TExercise,
   TFetchBaseOutput,
+  TFood,
   TMuscleGroup,
+  TNutrition,
   TPagingResponse,
+  TSchedule,
   TSetItem,
 } from './types';
 
@@ -217,7 +221,10 @@ export const FetchApi = {
       },
     };
 
-    const res = await CommonCall(apis.getAllSet(query), apiInit);
+    const res = await CommonCall<TPagingResponse<TSetItem[]>>(
+      apis.getAllSet(query),
+      apiInit,
+    );
     return res;
   },
   createSet: (body: TCreateSetBody) => {
@@ -247,6 +254,87 @@ export const FetchApi = {
     };
 
     const res = await CommonCall<TSetItem>(apis.getSet(id), apiInit);
+    return res;
+  },
+  getAllSchedule: async (query: { page?: number; limit?: number }) => {
+    const apiInit: RequestInit = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    };
+    console.log(apis.getAllSchedule(query));
+    const res = await CommonCall<TPagingResponse<TSchedule[]>>(
+      apis.getAllSchedule(query),
+      apiInit,
+    );
+    return res;
+  },
+  getSchedule: async (id: string) => {
+    const apiInit: RequestInit = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    };
+
+    const res = await CommonCall<TSchedule>(apis.getSchedule(id), apiInit);
+    return res;
+  },
+
+  createSchedule: (body: TCreateSchedule) => {
+    const apiInit: RequestInit = {
+      method: 'POST',
+      body: JSON.stringify(body),
+    };
+
+    return CommonCall<TSchedule>(apis.createSchedule, apiInit);
+  },
+  editSchedule: (body: TCreateSchedule) => {
+    const apiInit: RequestInit = {
+      method: 'POST',
+      body: JSON.stringify(body),
+    };
+
+    return CommonCall<TSchedule>(apis.editSchedule, apiInit);
+  },
+  deleteSchedule: (body: { id: string }) => {
+    const apiInit: RequestInit = {
+      method: 'DELETE',
+    };
+
+    return CommonCall(apis.getSchedule(body.id), apiInit);
+  },
+  getAllFood: async (query: { page?: number; limit?: number }) => {
+    const apiInit: RequestInit = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    };
+
+    const res = await CommonCall<TPagingResponse<TFood[]>>(
+      apis.getAllFood(query),
+      apiInit,
+    );
+    return res;
+  },
+  getAllNutrition: async () => {
+    const apiInit: RequestInit = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    };
+
+    const res = await CommonCall<TPagingResponse<TNutrition[]>>(
+      apis.getAllNutrition,
+      apiInit,
+    );
     return res;
   },
 };

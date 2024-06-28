@@ -17,6 +17,10 @@ export const useFormOptions = () => {
         value: 'lose_fat',
       },
     ],
+    scheduelType: [
+      { label: Strings.Weekly, value: 'Weekly' },
+      { label: Strings.Loop, value: 'Cyclic' },
+    ],
   };
   return { formOptions };
 };

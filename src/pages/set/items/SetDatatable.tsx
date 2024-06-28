@@ -3,6 +3,7 @@ import { useFormContext } from 'react-hook-form';
 
 import {
   Box,
+  Button,
   Card,
   CardContent,
   CardMedia,
@@ -25,6 +26,7 @@ import { TExercise, TSetItem } from '@/utils/FetchApi';
 import { useQuerySet } from '../modules/useQuerySet';
 import { useFormOptions } from '@/utils/modules/useFormOptions';
 import { Convert } from '@/utils/modules/Convert';
+import { useState } from 'react';
 
 export function SetDatatable() {
   const { Strings, code } = useAppLanguage();
@@ -111,26 +113,7 @@ export function SetDatatable() {
       align: 'left',
       minWidth: 200,
       render: (row: TSetItem) => {
-        return (
-          <Container>
-            <Grid
-              style={{ paddingTop: 40 }}
-              container
-              spacing={3}
-              direction={'column'}
-            >
-              {row.exercises.map(exercise => (
-                <Grid
-                  key={exercise._id}
-                  style={{ display: 'flex', alignItems: 'center' }}
-                >
-                  <Typography variant="h1">·</Typography>
-                  <ExerciseCard exercise={exercise} />
-                </Grid>
-              ))}
-            </Grid>
-          </Container>
-        );
+        return <ExerciseCards exercises={row.exercises} />;
       },
     },
     {
@@ -172,20 +155,30 @@ const ExerciseCard = ({
   exercise: TSetItem['exercises'][number];
 }) => {
   console.log(exercise);
+
   const renderQuantity = () => {
     if (exercise?.exercise?.type === 'rep') {
       return (
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          style={{ marginTop: 8 }}
+        >
           {`Quantity: ${exercise?.quantity}`}
         </Typography>
       );
     }
     return (
-      <Typography variant="body2" color="text.secondary">
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        style={{ marginTop: 8 }}
+      >
         {`Time: ${Convert.secondToTime(exercise?.quantity)}`}
       </Typography>
     );
   };
+
   return (
     <Card
       sx={{
@@ -193,30 +186,81 @@ const ExerciseCard = ({
         margin: 2,
         display: 'flex',
         minWidth: 300,
-        height: 75,
+        height: 100,
         marginTop: 0,
       }}
-
-      // style={{ backgroundColor: 'red', height: 100, width: 100 }}
     >
-      <CardMedia
-        component="img"
-        height="140"
-        style={{ width: 150, height: 75 }}
-        image={exercise?.exercise?.imageUrl}
-        alt={exercise?.exercise?.name}
-      />
-      <CardContent
-        style={{
-          minWidth: 100,
+      <Box
+        sx={{
+          width: 150,
           height: 100,
-          justifyContent: 'space-around',
-          paddingTop: 10,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
-        <Typography variant="h5">{exercise?.exercise?.name}</Typography>
+        <CardMedia
+          component="img"
+          sx={{
+            maxWidth: '100%',
+            maxHeight: '100%',
+            objectFit: 'contain',
+          }}
+          image={exercise?.exercise?.imageUrl}
+          alt={exercise?.exercise?.name}
+        />
+      </Box>
+      <CardContent
+        sx={{
+          minWidth: 100,
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          padding: 1,
+        }}
+      >
+        <Typography variant="subtitle2">{exercise?.exercise?.name}</Typography>
         {renderQuantity()}
       </CardContent>
     </Card>
+  );
+};
+
+export default ExerciseCard;
+
+const ExerciseCards = ({ exercises }: { exercises: TSetItem['exercises'] }) => {
+  const [expanded, setExpanded] = useState(false);
+  if (!exercises) {
+    return null;
+  }
+  const displayedExercise = expanded ? exercises : exercises.slice(0, 3);
+
+  return (
+    <Container>
+      <Grid
+        style={{ paddingTop: 40 }}
+        container
+        spacing={3}
+        direction={'column'}
+      >
+        {displayedExercise.map(exercise => (
+          <Grid
+            key={exercise._id}
+            style={{ display: 'flex', alignItems: 'center' }}
+          >
+            <Typography variant="h1">·</Typography>
+            <ExerciseCard exercise={exercise} />
+          </Grid>
+        ))}
+      </Grid>
+      {/* <Grid style={{ paddingTop: 40, height: 100 }} container spacing={3}> */}
+      {exercises.length > 3 && (
+        <Button onClick={() => setExpanded(!expanded)}>
+          {expanded ? 'See less' : 'See more'}
+        </Button>
+      )}
+      {/* </Grid> */}
+    </Container>
   );
 };

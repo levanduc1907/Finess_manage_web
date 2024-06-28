@@ -15,6 +15,7 @@ export function ExerciseNewForm() {
   const { Strings } = useAppLanguage();
   const { control } = useFormContext();
   const { data } = useQueryMuscleGroups();
+
   return (
     <Stack paddingTop={4} gap={4}>
       <Grid item xs={4}>

@@ -54,6 +54,8 @@ export const VietnameseString = {
   manage_applicants: 'Quản lý ứng viên',
   manage_exercise: 'Quản lý bài tập',
   manage_set: 'Quản lý buổi tập',
+  manage_schedule: 'Quản lý lịch tập',
+  manage_food: 'Quản lý dinh dưỡng',
   manage_companies: 'Quản lý công ty',
   manage_payments: 'Quản lý thanh toán',
   manage_notifications: 'Quản lý thông báo',
@@ -123,4 +125,7 @@ export const VietnameseString = {
   exercise: 'Bài tập',
   totalTime: 'Tổng thời gian',
   totalCalories: 'Tổng calo',
+  Weekly: 'Hằng tuần',
+  Loop: 'Lặp lại',
+  set: 'Buổi tập',
 };

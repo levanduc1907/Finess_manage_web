@@ -5,6 +5,8 @@ import { DashboardLayout } from '@/layouts';
 
 import { exerciseRoutes } from './exercise.route';
 import { setRoutes } from './set.route';
+import { scheduleRoutes } from './schedule.route';
+import { foodRoutes } from './food.route';
 
 const Dashboard = React.lazy(() =>
   import('@/pages/dashboard/Dashboard').then(mod => ({
@@ -21,5 +23,7 @@ export const dashboardRoutes: RouteObject = {
     },
     ...exerciseRoutes,
     ...setRoutes,
+    ...scheduleRoutes,
+    ...foodRoutes,
   ],
 };

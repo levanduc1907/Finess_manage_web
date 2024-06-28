@@ -54,6 +54,9 @@ export const EnglishString = {
   manage_applicants: 'Manage Applicants',
   manage_exercise: 'Manage Exercise',
   manage_set: 'Manage Set',
+  manage_schedule: 'Manage schedule',
+  manage_food: 'Manage nutrition',
+
   manage_companies: 'Manage Companies',
   manage_payments: 'Manage Payments',
   manage_notifications: 'Manage Notifications',
@@ -122,4 +125,7 @@ export const EnglishString = {
   exercise: 'Exercise',
   totalTime: 'Total time',
   totalCalories: 'Total calo',
+  Weekly: 'Weekly',
+  Loop: 'Loop',
+  set: 'set',
 };

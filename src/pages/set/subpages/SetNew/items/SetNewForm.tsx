@@ -1,12 +1,5 @@
 import { useEffect } from 'react';
-import {
-  Box,
-  Container,
-  FormLabel,
-  Grid,
-  IconButton,
-  Stack,
-} from '@mui/material';
+import { Box, FormLabel, Grid, IconButton, Stack } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import {
   useFieldArray,
@@ -27,7 +20,7 @@ import {
 import { useAppLanguage } from '@/utils/modules';
 import { useQueryAllExercise } from '../modules/useQueryAllExercise';
 import { theme } from '@/utils/modules/theme';
-import { TCreateSetBody, TExercise, TSetItem } from '@/utils/FetchApi';
+import { TCreateSetBody, TExercise } from '@/utils/FetchApi';
 import { useFormOptions } from '@/utils/modules/useFormOptions';
 
 const ExtraExerciseDataForm = ({
@@ -127,7 +120,7 @@ export function SetNewForm() {
     }
   };
 
-  const renderListApplicants = () => {
+  const renderListExercise = () => {
     return fields.map((field, index) => {
       return (
         <Grid
@@ -151,7 +144,7 @@ export function SetNewForm() {
                   },
                 }}
                 control={control}
-                label={Strings.time}
+                label={Strings.exercise}
                 name={`exercises.${index}.exercise`}
                 required
                 options={exerciseData}
@@ -223,7 +216,7 @@ export function SetNewForm() {
         </FormLabel>
       </Grid>
 
-      {renderListApplicants()}
+      {renderListExercise()}
       <AppButton
         onClick={handleAddRow}
         sx={{

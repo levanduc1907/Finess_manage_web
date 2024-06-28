@@ -79,3 +79,86 @@ export type TCreateSetBody = {
     time: number;
   }[];
 };
+
+export type TSchedule = {
+  name: string;
+  imageUrl?: string;
+  type: 'Weekly' | 'Cyclic';
+  createdBy: 'User' | 'Admin';
+  createdById: string;
+  week?: {
+    Monday?: TSetItem[];
+    Tuesday?: TSetItem[];
+    Wednesday?: TSetItem[];
+    Thursday?: TSetItem[];
+    Friday?: TSetItem[];
+    Saturday?: TSetItem[];
+    Sunday?: TSetItem[];
+  };
+  days?: {
+    dayNumber: number;
+    sets: TSetItem[];
+  }[];
+  repeatAfterDays?: number;
+};
+
+export type TCreateSchedule = {
+  id?: string;
+  name: string;
+  imageUrl?: string;
+  type: 'Weekly' | 'Cyclic';
+  week?: {
+    Monday?: string[];
+    Tuesday?: string[];
+    Wednesday?: string[];
+    Thursday?: string[];
+    Friday?: string[];
+    Saturday?: string[];
+    Sunday?: string[];
+  };
+  days?: {
+    dayNumber: number;
+    sets: string[];
+  }[];
+  repeatAfterDays?: number;
+};
+
+export const foodCategories = [
+  'Fruit',
+  'Vegetable',
+  'Meat&Fish',
+  'Dairy',
+  'Grain',
+  'Sweets',
+  'Other',
+] as const;
+export type TFoodCategory = (typeof foodCategories)[number];
+
+// Define an enum for measure units
+export const measureUnits = ['kg', 'liter'] as const;
+export type TMeasureUnit = (typeof measureUnits)[number];
+
+export type TNutrition = {
+  _id: string;
+  name: string;
+  calories: number;
+};
+
+export type TFood = {
+  _id: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  category: TFoodCategory;
+  measureUnit: TMeasureUnit;
+  nutritions: {
+    nutrition: TNutrition;
+    quantity: number;
+    _id: string;
+  }[];
+
+  caloriesPerUnit: number;
+  createdAt: string;
+  updatedAt: string;
+  id: string;
+};

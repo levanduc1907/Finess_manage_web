@@ -1300,6 +1300,11 @@ cli-truncate@^4.0.0:
     slice-ansi "^5.0.0"
     string-width "^7.0.0"
 
+cloc@^2.0.0-cloc:
+  version "2.0.0-cloc"
+  resolved "https://registry.yarnpkg.com/cloc/-/cloc-2.0.0-cloc.tgz#05c8fb1fddf241e3265c0aad2a64f72b78b69a72"
+  integrity sha512-hy6aS/5QbKlxyasequhfAOHOBzV1QpBeA01P8hnjnlV++OaRXazX3YLv5Mpqw0+Vh4FV4kiFhKYSV2x6CAKlpQ==
+
 clone@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
